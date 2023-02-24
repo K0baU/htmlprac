@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ES-Jam 〜Webプログラミング道場〜</title>
+    <title>MD-Jam 〜Web道場〜</title>
 </head>
 
 <body style="height:100vh;">
@@ -17,7 +17,7 @@
             -->
         </div>
         <h1 style="font-size:1.5em;">
-            ES-Jam <span style="font-size:66%;">〜Webプログラミング道場〜</span>
+            MD-Jam <span style="font-size:66%;">〜Web道場〜</span>
         </h1>
     </div>
     <div style="height:calc(100vh - 7em);">
@@ -34,13 +34,12 @@
 
     <script type="module">
         import { monaco } from "https://code4fukui.github.io/monaco-editor/monaco.js";
-        import { fixMyHTML } from "https://code4fukui.github.io/fixMyHTML/fixMyHTML.js";
 
         let g_editor;
 
         async function エディタを作る() {
             g_editor = monaco.editor.create(elmEditor, {
-                language: "html",
+                language: "markdown",
                 //autoIndent: true,
                 autoIndent: "none",
                 //formatOnPaste: true,
@@ -70,18 +69,12 @@
         }
 
         function 見てみる() {
-            const p1 = g_editor.getValue();
-            const p2 = fixMyHTML(p1);
-            if (p1 != p2) {
-                g_editor.setValue(p2);
-                //alert("全角文字を半角文字に置き換えました");
-            }
             //g_editor.getAction("editor.action.formatDocument").run();
-            elmPreview.src = URL.createObjectURL(new Blob([g_editor.getValue()], { type: "text/html" }));
+            elmPreview.src = URL.createObjectURL(new Blob([g_editor.getValue()], { type: "text/markdown" }));
         }
 
         function SAVEする() {
-            elmSave.download = `WebDOJO.${Date.now()}.html`;
+            elmSave.download = `WebDOJO.${Date.now()}.md`;
             elmSave.href = URL.createObjectURL(new Blob([g_editor.getValue()], { type: "application/octet-stream" }));
             elmSave.click();
         }
